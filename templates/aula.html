@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/estilo.css')}}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block conteudo %}
     Aula de Web com Flask
     Nome: {{dados_html.nome}}
     Curso: {{dados_html.curso}}
     Ano: {{dados_html.ano}}
     <a href ="/">Voltar</a>
-    <img src="{{url_for('static', filename='img/download.jpeg')}}"
-</body>
-</html>
+    <img src="{{url_for('static', filename='img/download.jpeg')}}">
+    {% endblock %}
