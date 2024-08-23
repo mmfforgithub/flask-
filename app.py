@@ -1,6 +1,17 @@
 from flask import Flask, render_template, request
-
+from database import db
+from flask_migrate import Migrate
+from models import Usuario
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'you-will-never-guess'
+
+#drive://usuario:senha@servidor/banco_dados
+conexao = "mysql+pymysql://alunos:cefetmg@127.0.0.1/flaskg1"
+app.config['SQLALCHEMY_DATABASE_URI'] = conexao
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+migrate = Migrate(app, db)
 
 @app.route('/')
 def index():
@@ -25,6 +36,11 @@ def dados():
     idade = int(request.form["idade"])
     # request serve para carregar os dados de um formulário enviado. Utilizado para passar seus dados à uma outra página. 
     return render_template('dados.html', dados = dados, idade = idade)
+
+@app.route('/usuario')
+def usuario():
+    u = Usuario.query.all()
+    return render_template('usuario_lista.html', dados = u)
 
 
 if __name__ == '__main__':
