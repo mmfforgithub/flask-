@@ -1,3 +1,7 @@
+body{
+    background-color: yellowgreen;
+}
+
 a, input {
     display: block;
 }
